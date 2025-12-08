@@ -18,13 +18,19 @@
 				font-size: 2em;
 				margin-top: 20px;
 			}
+			#weather {
+				font-size: 1em;
+				margin-top: 20px;
+			}
 		</style>
 
 	</head>
 	<body>
 		<div id="time">Loading time...</div>
 		<div id="date">Loading date...</div>
+		<div id="weather">Loading weather...</div>
 		<script>
+			<!-- Updates the time element -->
 			const timeEl = document.getElementById("time");
 			const timeStream = new EventSource("http://127.0.0.1:5000/stream_time");
 
@@ -36,6 +42,7 @@
 				timeEl.textContent = "Connection lost...";
 			};
 
+			<!-- Updates the date element -->
 			const dateEl = document.getElementById("date");
 			const dateStream = new EventSource("http://127.0.0.1:5000/stream_date");
 
@@ -45,6 +52,18 @@
 
 			dateStream.onerror = () => {
 				dateEl.textContent = "Connection lost...";
+			};
+
+			<!-- Updates the weather element -->
+			const weatherEl = document.getElementById("weather");
+			const weatherStream = new EventSource("http://127.0.0.1:5000/stream_weather");
+
+			weatherStream.onmessage = (event) => {
+				weatherEl.textContent = event.data;
+			};
+
+			weatherStream.onerror = () => {
+				weatherEl.textContent = "Connection lost...";
 			};
 		</script>
 	</body>
