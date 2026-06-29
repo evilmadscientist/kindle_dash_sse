@@ -8,7 +8,7 @@ import time
 app = Flask(__name__)
 
 PACIFIC_TZ = pytz.timezone("America/Los_Angeles")
-NTP_SERVER = "time.cloudflare.com"
+NTP_SERVER = "time.nist.gov"
 
 CAZ_ZONE = "CAZ006" # NOAA weather.gov zone for San Francisco, CAZ006 by default
 WEATHER_URL = "https://api.weather.gov/zones/forecast/" + CAZ_ZONE + "/forecast"
